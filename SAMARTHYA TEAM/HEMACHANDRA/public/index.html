@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Syllabus Quiz Generator</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>📚 Syllabus Quiz Generator</h1>
+    <div class="input-group">
+      <label for="teacherName">Teacher Name:</label>
+      <input type="text" id="teacherName" placeholder="Enter teacher name" required>
+    </div>
+    <textarea id="syllabusInput" placeholder="Paste your syllabus here..."></textarea>
+    <button id="generateBtn">Generate Quiz</button>
+    <div id="quizOutput" class="quiz-container"></div>
+    
+    <div class="teacher-quizzes">
+      <h2>Previously Generated Quizzes</h2>
+      <div class="input-group">
+        <input type="text" id="searchTeacher" placeholder="Enter teacher name">
+        <button id="searchBtn">Search</button>
+      </div>
+      <div id="quizList"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

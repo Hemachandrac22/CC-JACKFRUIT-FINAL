@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Performance Analysis</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Student Performance Form</h1>
+    <form id="performanceForm">
+      <label>Average Study Hours per Day:</label><br>
+      <input type="number" step="any" name="avg_study_hours_per_day" placeholder="Avg Study Hours/Day" required>
+      <label>Attendance Percentage:</label><br>
+      <input type="number" step="any" name="attendance_percent" placeholder="Attendance (%)" required>
+      <label>Past Exam 1 Score:</label><br>
+      <input type="number" step="any" name="past_exam_score_1" placeholder="Past Exam Score 1" required>
+      <label>Past Exam 2 Score:</label><br>
+      <input type="number" step="any" name="past_exam_score_2" placeholder="Past Exam Score 2" required>
+      <label>Past Exam 3 Score:</label><br>
+      <input type="number" step="any" name="past_exam_score_3" placeholder="Past Exam Score 3" required>
+      <label>Average Sleep Hours per Night:</label><br>
+      <input type="number" step="any" name="sleep_hours_per_day" placeholder="Sleep Hours/Day" required>
+      <label>Daily Internet Usage (in hours):</label><br>
+      <input type="number" step="any" name="internet_usage_hours" placeholder="Internet Usage Hours" required>
+      <label>Class Participation Score (out of 10):</label><br>
+      <input type="number" step="any" name="participation_score" placeholder="Participation Score" required>
+      <label>Assignment Completion Ratio (e.g. 0.8):</label><br>
+      <input type="number" step="any" name="assignments_completed_ratio" placeholder="Assignments Completed Ratio" required>
+      <label>Extracurricular Activity Score (out of 10):</label><br>
+      <input type="number" step="any" name="extra_curricular_score" placeholder="Extra Curricular Score" required>
+      <label>Grade:</label><br>
+      <input type="text" name="grade" placeholder="Grade" required>
+      <button type="submit">Submit</button>
+    </form>
+
+    <button id="analyzeBtn">Get Performance Analysis</button>
+    <div id="aiOutput"></div>
+    <canvas id="chart" width="400" height="200"></canvas>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

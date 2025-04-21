@@ -1,0 +1,126 @@
+[{
+  "_id": {
+    "$oid": "67f91fddcd7d148c0b1f4a23"
+  },
+  "name": "Sai",
+  "email": "sai@gmail.com",
+  "department": "CSE",
+  "designation": "HOD",
+  "phone": "08328149187",
+  "office": "AIML",
+  "username": "sai",
+  "password": "$2b$12$DlUW5DHNbloW5g4kFxzGPuX8do3DNRRMIIrjDA4HCh4TDcC3OfHO.",
+  "passwordChanged": true,
+  "createdAt": {
+    "$date": "2025-04-11T13:57:49.362Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-11T14:03:42.377Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67f935a9cd7d148c0b1f4a32"
+  },
+  "name": "bro",
+  "email": "br@gmail.com",
+  "department": "CSE",
+  "designation": "Associate Professor",
+  "phone": "8328149187",
+  "office": "201",
+  "username": "br",
+  "password": "$2b$12$bpJZcrpUzhANJd2ngnQndexWgFJqm8YCzl.ooLHJJWM9XIWwTsEeW",
+  "passwordChanged": false,
+  "createdAt": {
+    "$date": "2025-04-11T15:30:49.320Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-11T15:54:42.799Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67f936dbcd7d148c0b1f4a3a"
+  },
+  "name": "sas",
+  "email": "sas@gmail.com",
+  "department": "AIML",
+  "designation": "Professor",
+  "phone": "8328149187",
+  "office": "204",
+  "username": "sas",
+  "password": "$2b$12$.rAq.31ui7Ssea7CMYdT9OHKGzGhCYSDYHGDxthPZWD3eHjHAO98y",
+  "passwordChanged": true,
+  "createdAt": {
+    "$date": "2025-04-11T15:35:55.222Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-11T16:49:44.425Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67f93962e0203eb51318afd8"
+  },
+  "name": "Administrator",
+  "email": "admin@example.com",
+  "department": "Administration",
+  "designation": "System Administrator",
+  "phone": "0000000000",
+  "office": "Admin Office",
+  "username": "admin",
+  "password": "$2b$12$EjvkHGk3wp.J8tPpOWTnbeLFWEO1YKaFHLKJ2nr40Ism3BHtxZFq.",
+  "passwordChanged": false,
+  "createdAt": {
+    "$date": "2025-04-11T15:46:42.116Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-11T15:46:42.116Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67f93a4fe0203eb51318afe4"
+  },
+  "name": "ds",
+  "email": "ds@gmail.com",
+  "department": "CSE",
+  "designation": "Professor",
+  "phone": "8328149187",
+  "office": "205",
+  "username": "ds",
+  "password": "$2b$12$0aVfPy56fgQcl3JZD6W9/.UETilVbmLahOCa59DL7/IBgt5rRDO3S",
+  "passwordChanged": false,
+  "createdAt": {
+    "$date": "2025-04-11T15:50:39.376Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-11T15:50:39.376Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67f94a274e875b1cfd75d2f0"
+  },
+  "name": "ai",
+  "email": "ai@gmail.com",
+  "department": "AIML",
+  "designation": "HOD",
+  "phone": "8328149187",
+  "office": "200",
+  "username": "ai",
+  "password": "$2b$12$1HueBZ4vr1bsbfo9A8RduObelYrB0VDCjDao8MnjSkffQ.NOYDV7O",
+  "passwordChanged": false,
+  "createdAt": {
+    "$date": "2025-04-11T16:58:15.199Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-11T16:58:15.199Z"
+  },
+  "__v": 0
+}]

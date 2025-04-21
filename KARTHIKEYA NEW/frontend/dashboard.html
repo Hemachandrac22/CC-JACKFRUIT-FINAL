@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Department Management Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h2><i class="fas fa-university"></i> Department Management Dashboard</h2>
+      <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+
+    <div class="dashboard-content container">
+      <div class="user-info">
+        <h3><i class="fas fa-user-circle"></i> Welcome, <span id="userRole">User</span></h3>
+      </div>
+
+      <!-- Admin Only Actions -->
+      <div id="adminActions" class="button-group hidden">
+
+        <button class="action-button" onclick="window.location.href='faculty.html'">
+          <i class="fas fa-user-cog"></i> Manage Users
+        </button>
+        <button class="action-button" onclick="window.location.href='events.html'">
+          <i class="fas fa-calendar-alt"></i> Manage Events
+        </button>
+      </div>
+
+      <!-- HOD/Chairperson Actions -->
+      <div id="hodActions" class="button-group hidden">
+        <button class="action-button" onclick="window.location.href='faculty.html'">
+          <i class="fas fa-users"></i> Manage Faculty
+        </button>
+
+        <button class="action-button" onclick="window.location.href='events.html'">
+          <i class="fas fa-calendar-alt"></i> Manage Events
+        </button>
+      </div>
+
+      <!-- Professor Actions -->
+      <div id="professorActions" class="button-group hidden">
+        <button class="action-button" onclick="window.location.href='view_faculty.html'">
+          <i class="fas fa-address-book"></i> View Faculty Directory
+        </button>
+        
+        <button class="action-button" onclick="window.location.href='events.html'">
+          <i class="fas fa-calendar-alt"></i> View Events
+        </button>
+      </div>
+    </div>
+    
+    <div class="dashboard-footer">
+      <p>&copy; 2025 Department Management System</p>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

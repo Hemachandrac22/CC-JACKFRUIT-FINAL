@@ -1,0 +1,206 @@
+/* Modern Professional UI */
+
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* General Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2, h3 {
+  color: #2c3e50;
+  margin-top: 0;
+  font-weight: 500;
+}
+
+a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+/* Header Styles */
+.header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Button Styles */
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+/* Form Styles */
+form {
+  background-color: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  outline: none;
+}
+
+/* Button Group */
+.button-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.action-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* List Styles */
+#facultyList, #eventList, #usersList {
+  margin-top: 30px;
+}
+
+#facultyList div, #eventList div, #usersList div {
+  background-color: white;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#facultyList div:hover, #eventList div:hover, #usersList div:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#facultyList p, #eventList p, #usersList p {
+  margin: 5px 0;
+}
+
+/* User Info */
+.user-info {
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+/* Utility Classes */
+.hidden {
+  display: none;
+}
+
+hr {
+  margin: 20px 0;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .button-group {
+    grid-template-columns: 1fr;
+  }
+  
+  form {
+    padding: 15px;
+  }
+  
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .header button {
+    margin-top: 10px;
+  }
+}
+
+/* Dashboard Specific Styles */
+.dashboard-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.dashboard-header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.dashboard-content {
+  padding: 20px;
+}

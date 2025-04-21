@@ -1,0 +1,54 @@
+services:
+
+  backend:
+    build: ./KARTHIKEYA NEW/backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - faculty
+      - event
+
+  faculty:
+    build: ./KARTHIKEYA NEW/faculty-service
+    ports:
+      - "5001:5001"
+
+  event:
+    build: ./KARTHIKEYA NEW/event-service
+    ports:
+      - "3000:3000"
+
+  abhishek:
+    build: ./SAMARTHYA TEAM/ABHISHEK BHAT
+    ports:
+      - "5002:5002"
+
+  chaitra:
+    build: ./SAMARTHYA TEAM/CHAITRA
+    ports:
+      - "5004:5004"
+
+  hemachandra:
+    build: ./SAMARTHYA TEAM/HEMACHANDRA
+    ports:
+      - "5005:5005"
+
+  vidhathri:
+    build: ./SAMARTHYA TEAM/VIDHATHRI
+    ports:
+      - "5003:5003"
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: Hemachandra1!
+      MYSQL_DATABASE: student_analytics
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

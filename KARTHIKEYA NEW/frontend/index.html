@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Department Management System</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #3498db, #2c3e50);
+    }
+    
+    .login-container {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      overflow: hidden;
+    }
+    
+    .login-header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .login-form {
+      padding: 30px;
+    }
+    
+    .login-title {
+      margin-top: 0;
+      color: white;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #2c3e50;
+    }
+    
+    .login-toggle {
+      display: flex;
+      margin-bottom: 20px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid #ddd;
+    }
+    
+    /* Updated styles for the Faculty/HOD Login button to improve visibility */
+    .toggle-btn {
+      flex: 1;
+      background: #f5f7fa; /* Default background color */
+      color: #2c3e50; /* Default font color */
+      border: none;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .toggle-btn.active {
+      background: #3498db; /* Background color when selected */
+      color: white; /* Font color when selected */
+    }
+    
+    .toggle-btn:not(.active) {
+      background: #ffffff; /* Background color when not selected */
+      color: #2c3e50; /* Font color when not selected */
+    }
+    
+    .login-footer {
+      text-align: center;
+      padding: 15px;
+      border-top: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <h2 class="login-title"><i class="fas fa-university"></i> Department Management System</h2>
+    </div>
+    
+    <div class="login-form">
+      <div class="login-toggle">
+        <button id="adminLoginBtn" class="toggle-btn active" onclick="showAdminLogin()">Admin Login</button>
+        <button id="facultyLoginBtn" class="toggle-btn" onclick="showFacultyLogin()">Faculty/HOD Login</button>
+      </div>
+      
+      <!-- Admin Login Form -->
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label for="username"><i class="fas fa-user"></i> Username:</label>
+          <input type="text" id="username" name="username" placeholder="Enter admin username" required>
+        </div>
+        <div class="form-group">
+          <label for="password"><i class="fas fa-lock"></i> Password:</label>
+          <input type="password" id="password" name="password" placeholder="Enter password" required>
+        </div>
+        <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+      </form>
+      
+      <!-- Faculty Login Form -->
+      <form id="facultyLoginForm" style="display: none;">
+        <div class="form-group">
+          <label for="fusername"><i class="fas fa-user-tie"></i> Username:</label>
+          <input type="text" id="fusername" name="username" placeholder="Enter faculty username" required>
+        </div>
+        <div class="form-group">
+          <label for="fpassword"><i class="fas fa-lock"></i> Password:</label>
+          <input type="password" id="fpassword" name="password" placeholder="Enter password" required>
+        </div>
+        <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+      </form>
+    </div>
+    
+    <div class="login-footer">
+      <p>&copy; 2025 Department Management System</p>
+    </div>
+  </div>
+
+  <script>
+    // Toggle between admin and faculty login
+    function showAdminLogin() {
+      document.getElementById('adminLoginForm').style.display = 'block';
+      document.getElementById('facultyLoginForm').style.display = 'none';
+      document.getElementById('adminLoginBtn').classList.add('active');
+      document.getElementById('facultyLoginBtn').classList.remove('active');
+    }
+    
+    function showFacultyLogin() {
+      document.getElementById('adminLoginForm').style.display = 'none';
+      document.getElementById('facultyLoginForm').style.display = 'block';
+      document.getElementById('adminLoginBtn').classList.remove('active');
+      document.getElementById('facultyLoginBtn').classList.add('active');
+    }
+
+    // Admin Login Handler
+    document.getElementById('adminLoginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('currentUser', JSON.stringify(data.user));
+          window.location.href = 'dashboard.html';
+        } else {
+          alert(data.message || 'Login failed. Please check your credentials.');
+        }
+      } catch (err) {
+        console.error('Error:', err);
+        alert('Server error. Please try again later.');
+      }
+    });
+    
+    // Faculty Login Handler
+    document.getElementById('facultyLoginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('fusername').value;
+      const password = document.getElementById('fpassword').value;
+      
+      try {
+        const response = await fetch('http://localhost:5001/api/faculty/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok && data.token) {
+          localStorage.setItem('facultyToken', data.token);
+          localStorage.setItem('faculty', JSON.stringify(data.faculty));
+          window.location.href = 'dashboard.html';
+        } else {
+          alert(data.message || 'Login failed. Please check your credentials.');
+        }
+      } catch (err) {
+        console.error('Error:', err);
+        alert('Server error. Please try again later.');
+      }
+    });
+  </script>
+</body>
+</html>

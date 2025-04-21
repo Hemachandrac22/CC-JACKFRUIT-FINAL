@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manage HOD</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Manage HOD</h2>
+
+  <form id="addHodForm">
+    <input type="text" placeholder="Name" name="name" required />
+    <input type="email" placeholder="Email" name="email" required />
+    <select name="department" required>
+      <option value="">Select Department</option>
+      <option value="CSE">CSE</option>
+      <option value="AIML">AIML</option>
+    </select>
+    <select name="designation" required>
+      <option value="HOD">HOD</option>
+      <option value="Professor">Professor</option>
+      <option value="Assistant Professor">Assistant Professor</option>
+      <option value="Associate Professor">Associate Professor</option>
+    </select>
+    <input type="text" placeholder="Phone" name="phone" required />
+    <input type="text" placeholder="Office" name="office" required />
+    <input type="password" placeholder="Initial Password (Default: faculty123)" name="password" />
+    <input type="hidden" name="facultyId" id="hodId" />
+    <button type="submit">Save</button>
+  </form>
+
+  <hr/>
+
+  <div id="hodList"></div>
+
+  <script>
+    const API_URL = 'http://localhost:5001/api/faculty';
+
+    async function loadHod() {
+      const res = await fetch(API_URL + '/all');
+      const data = await res.json();
+      const list = document.getElementById('hodList');
+      list.innerHTML = '';
+      data.filter(f => f.designation === 'HOD').forEach(hod => {
+        const div = document.createElement('div');
+        div.innerHTML = `
+          <p><strong>${hod.name}</strong> - ${hod.designation} (${hod.department})</p>
+          <p>Email: ${hod.email} | Phone: ${hod.phone} | Designation: ${hod.designation} | Office: ${hod.office}</p>
+          <button onclick="editHod('${hod._id}', '${hod.name}', '${hod.email}', '${hod.department}', '${hod.designation}', '${hod.phone}', '${hod.office}')">Edit</button>
+          <button onclick="deleteHod('${hod._id}')">Delete</button>
+          <hr/>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    function editHod(id, name, email, department, designation, phone, office) {
+      document.getElementById('hodId').value = id;
+      const form = document.getElementById('addHodForm');
+      form.name.value = name;
+      form.email.value = email;
+      form.department.value = department;
+      form.designation.value = designation;
+      form.phone.value = phone;
+      form.office.value = office;
+    }
+
+    async function deleteHod(id) {
+      await fetch(API_URL + '/' + id, { method: 'DELETE' });
+      loadHod();
+    }
+
+    document.getElementById('addHodForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const facultyId = document.getElementById('hodId').value;
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        department: form.department.value,
+        designation: form.designation.value,
+        phone: form.phone.value,
+        office: form.office.value,
+        password: form.password.value || 'faculty123'
+      };
+      
+      if (facultyId) {
+        await fetch(API_URL + '/' + facultyId, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+      } else {
+        await fetch(API_URL + '/add', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+      }
+      form.reset();
+      loadHod();
+    });
+
+    loadHod();
+  </script>
+</body>
+</html>

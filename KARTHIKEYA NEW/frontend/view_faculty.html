@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Faculty Directory</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Faculty Directory</h2>
+
+  <!-- Add/Edit Faculty Form -->
+  <form id="addFacultyForm" style="display: none;">
+    <input type="text" placeholder="Name" name="name" required />
+    <input type="email" placeholder="Email" name="email" required />
+    <select name="department" id="department" disabled>
+      <option value="">Select Department</option>
+    </select>
+    <select name="designation" required>
+      <option value="">Select Designation</option>
+      <option value="Professor">Professor</option>
+      <option value="Assistant Professor">Assistant Professor</option>
+      <option value="Associate Professor">Associate Professor</option>
+    </select>
+    <input type="text" placeholder="Phone" name="phone" required />
+    <input type="text" placeholder="Office" name="office" required />
+    <input type="password" placeholder="Initial Password (Default: faculty123)" name="password" />
+    <input type="hidden" name="facultyId" id="facultyId" />
+    <button type="submit">Save</button>
+  </form>
+
+  <hr/>
+
+  <div id="facultyList"></div>
+
+  <script>
+    const API_URL = 'http://localhost:5001/api/faculty';
+    
+    // Determine user's role and department
+    function getUserInfo() {
+      const faculty = JSON.parse(localStorage.getItem('faculty') || '{}');
+      return {
+        role: faculty.designation || '',
+        department: faculty.department || '',
+        facultyId: faculty.id || ''
+      };
+    }
+
+    // Fetch and display faculty
+    async function loadFaculty() {
+      try {
+        const token = localStorage.getItem('facultyToken');
+        if (!token) {
+          window.location.href = 'index.html';
+          return;
+        }
+
+        const res = await fetch(API_URL + '/all', {
+          headers: { 'x-faculty-token': token }
+        });
+        
+        if (!res.ok) {
+          console.error('Failed to fetch faculty:', await res.json());
+          return;
+        }
+        
+        const data = await res.json();
+        const list = document.getElementById('facultyList');
+        list.innerHTML = '';
+        
+        const userInfo = getUserInfo();
+        const form = document.getElementById('addFacultyForm');
+        
+        // Only show form for HOD users
+        if (userInfo.role.toUpperCase() === 'HOD') {
+          form.style.display = 'block';
+        } else {
+          form.style.display = 'none';
+        }
+        
+        data.forEach(faculty => {
+          const div = document.createElement('div');
+          div.innerHTML = `
+            <p><strong>${faculty.name}</strong> - ${faculty.designation} (${faculty.department})</p>
+            <p>Email: ${faculty.email} | Phone: ${faculty.phone} | Office: ${faculty.office}</p>
+            ${userInfo.role.toUpperCase() === 'HOD' ? `<button onclick="editFaculty('${faculty._id}', '${faculty.name}', '${faculty.email}', '${faculty.department}', '${faculty.designation}', '${faculty.phone}', '${faculty.office}')">Edit</button>` : ''}
+            <hr/>
+          `;
+          list.appendChild(div);
+        });
+      } catch (err) {
+        console.error('Error loading faculty:', err);
+      }
+    }
+
+    // Pre-fill the form with faculty details for editing
+    function editFaculty(id, name, email, department, designation, phone, office) {
+      const form = document.getElementById('addFacultyForm');
+      document.getElementById('facultyId').value = id;
+      form.name.value = name;
+      form.email.value = email;
+      document.getElementById('department').innerHTML = `<option value="${department}" selected>${department}</option>`;
+      form.designation.value = designation;
+      form.phone.value = phone;
+      form.office.value = office;
+    }
+
+    // Pre-fill department dropdown and handle form submission
+    async function setupForm() {
+      const token = localStorage.getItem('facultyToken');
+      if (!token) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      // Decode token to get HOD's department
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const department = payload.department;
+
+      // Set department dropdown
+      const departmentDropdown = document.getElementById('department');
+      departmentDropdown.innerHTML = `<option value="${department}" selected>${department}</option>`;
+
+      // Handle form submission
+      document.getElementById('addFacultyForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const facultyId = document.getElementById('facultyId').value;
+        const data = {
+          name: form.name.value,
+          email: form.email.value,
+          department: department, // Fixed to HOD's department
+          designation: form.designation.value,
+          phone: form.phone.value,
+          office: form.office.value,
+          password: form.password.value || 'faculty123' // Default password
+        };
+
+        try {
+          const res = await fetch(API_URL + (facultyId ? `/${facultyId}` : '/add'), {
+            method: facultyId ? 'PUT' : 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-faculty-token': token
+            },
+            body: JSON.stringify(data)
+          });
+
+          if (res.ok) {
+            form.reset();
+            loadFaculty(); // Reload faculty list
+          } else {
+            console.error('Error saving faculty:', await res.json());
+          }
+        } catch (err) {
+          console.error('Error saving faculty:', err);
+        }
+      });
+    }
+
+    // Initial setup
+    setupForm();
+    loadFaculty();
+  </script>
+</body>
+</html>
