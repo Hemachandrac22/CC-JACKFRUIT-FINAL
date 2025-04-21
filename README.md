@@ -6,8 +6,11 @@ while two were integrated from external sources to deliver a comprehensive unive
 **Project Structure:**
 
 The main folder contains:
+
 SAMARTHYA TEAM/: Includes the four AI-based microservices built by us.
+
 KARTHIKEYA NEW/: Includes two additional microservices fetched from external sources.
+
 docker-compose.yml: Configuration file that defines the build instructions, port numbers, and dependencies for all microservices.
 
 Each microservice folder includes a Dockerfile for containerization.
@@ -47,7 +50,7 @@ Allows roles like "HOD" to manage faculty data and privileges.
 Enables faculty members to create and manage academic events.
 Events are visible across faculty accounts with permission-based access.
 
-**Docker Setup**
+**Docker Setup:**
 
 Each microservice is containerized using Docker. There are two types of microservices:
 Flask-based services: Dockerfiles include steps to copy files, install dependencies, expose ports, and run app.py.
