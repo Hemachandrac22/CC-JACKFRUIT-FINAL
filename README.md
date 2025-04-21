@@ -53,7 +53,9 @@ Events are visible across faculty accounts with permission-based access.
 **Docker Setup:**
 
 Each microservice is containerized using Docker. There are two types of microservices:
+
 Flask-based services: Dockerfiles include steps to copy files, install dependencies, expose ports, and run app.py.
+
 Node.js-based services: Dockerfiles perform similar steps, ending with the execution of server.js.
 
 **Build & Run Instructions:**
